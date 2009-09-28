@@ -13,18 +13,26 @@ class Environment
 	#define FIELD_DIMENSION		'd'				//the number of squares per side in the field
 	#define PAYOFF_MATRIX		'p'				//location of payoff matrix file
 	#define SEQ_SPACE			's'				//location of sequence space file
-	#define HELP				'?'				//display the help text
-	
+	#define HELP				'?'				//display the help text 
+        #define STATE                                  'i'                           //uses a given starting state
 	//variables
+ private:	
+        state init_state=0;
+	int agent_num=0;
+	int field_dim=0;
+	char payoff_file[FILESIZE]=0;
+	char seq_file[FILESIZE]=0;
+	State state=0;
+
+	static final Environment* env;
+	Environment();								//ctor is private (env is singleton
 	
-	int agent_num;
-	int field_dim;
-	char payoff_file[FILESIZE];
-	char seq_file[FILESIZE];
+
 	
 public:
-	Environment();								//ctor
-	virtual ~Environment();						//dtor
+
+	Environment* getInstance();                                      //returns pointer to singleton env
+       	virtual ~Environment();						//dtor
 	void addAgent(Agent);						//Add agent to the environment
 	int getPerformanceMeasure();				//returns an indicator of the agent's performance
 	void start(State);							//start the system from an initial state

@@ -5,10 +5,15 @@ namespace archipelago
 
 int main(int argc, char* argv[])
 {
-	parse(argc, argv);
+
+  //this will be implemented once I have time, but for now, everything will be hardcoded
+  //parse(argc, argv);
+
+  initialize()
+    
+  
 	
 }
-
 
 
 Environment::Environment()
@@ -19,6 +24,14 @@ Environment::~Environment()
 {
 }
 
+  Environment::Environment* getInstance()
+  {
+    if(env == NULL)
+      {
+	env = new Environment();
+      }
+    return env;
+  }
 
 
 Environment:: void addAgent(Agent)
@@ -35,7 +48,17 @@ Environment:: void start(State)
 
 Environment:: void initialize()
 {
+  Environment* inst;
+  
+
+  if(init_state)
+    {
+      
+    }
+  
+  
 }
+
 
 Environment:: void parse(int ac, char* av[])
 {
@@ -46,6 +69,11 @@ Environment:: void parse(int ac, char* av[])
 	}
 	
 }
+
+  Environment:: void setState(State* st)
+  {
+    
+  }
 
 Environment:: void parse_cmd (char* param)
 {
@@ -61,16 +89,26 @@ Environment:: void parse_cmd (char* param)
 		
 		if(sw == AGENT_NUM)
 		{
-			
+		  p++;
+		  agent_num = (int)sw;
 		}
+		else if(sw == STATE)
+		  {
+		    p++;
+		    init_state = (state)sw;
+		  }
 		else if(sw == FIELD_DIMENSION)
 		{
+		  p++;
+		  field_dim = (int)sw;
 		}
 		else if(sw == PAYOFF_MATRIX)
 		{
+		  //OPEN payoff matrix file here
 		}
 		else if(sw == SEQ_SPACE)
 		{
+		  //open sequence space file here
 		}
 		else if(sw == HELP)
 		{
